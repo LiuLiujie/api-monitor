@@ -1,0 +1,11 @@
+{
+  "name": "GitHub API",
+  "schema": "simple-1.0",
+  "request": {
+    "server": "https://api.github.com",
+    "method": "GET"
+  },
+  "response": {
+    "status": 200
+  }
+}
