@@ -16,18 +16,11 @@
  *
  */
 
-package com.yujieliu.apimonitor.communication.domains;
+package com.yujieliu.apimonitor.communication.constant;
 
-import lombok.Getter;
-import lombok.Setter;
+public class C2OConstant {
 
-import java.util.Date;
+    public static final String INVALID_HTTP_API = "Invalid http API";
 
-@Setter
-@Getter
-public class SimpleHTTPResult extends BaseResult{
-
-    public SimpleHTTPResult(BaseAPI api, boolean connection, Date time) {
-        super(api, connection, time);
-    }
+    public static final String ADDING_API_ERROR = "Fail to transfer API to the runner";
 }

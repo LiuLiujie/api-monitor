@@ -16,18 +16,11 @@
  *
  */
 
-package com.yujieliu.apimonitor.communication.domains;
+package com.yujieliu.apimonitor.communication.o2r.mq;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.yujieliu.apimonitor.communication.o2r.ResultSubscriber;
+import com.yujieliu.apimonitor.communication.domains.BaseResult;
 
-import java.util.Date;
+public interface KafkaResultSubscriber <T extends BaseResult> extends ResultSubscriber<T> {
 
-@Setter
-@Getter
-public class SimpleHTTPResult extends BaseResult{
-
-    public SimpleHTTPResult(BaseAPI api, boolean connection, Date time) {
-        super(api, connection, time);
-    }
 }

@@ -24,19 +24,20 @@ import lombok.Setter;
 
 @Setter
 @Getter
+@NoArgsConstructor
 public class SimpleHTTPAPI extends BaseAPI {
 
     Request request;
 
     Response response;
 
-    public SimpleHTTPAPI(String name, String schema, String server, String method, int status){
-        super(name, schema);
+    public SimpleHTTPAPI(String id, String name, String schema, String version, String server, String method, int status){
+        super(id, name, schema, version);
         this.request = new Request();
-        request.server = server;
-        request.method = method;
+        this.request.server = server;
+        this.request.method = method;
         this.response = new Response();
-        response.status = status;
+        this.response.status = status;
     }
 
     @Setter

@@ -20,14 +20,20 @@ package com.yujieliu.apimonitor.communication.domains;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Setter
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 public abstract class BaseAPI {
+
+    String id;
 
     String name;
 
     String schema;
+
+    String version;
 }

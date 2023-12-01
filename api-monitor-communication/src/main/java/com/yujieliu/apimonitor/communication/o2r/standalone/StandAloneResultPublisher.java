@@ -16,13 +16,11 @@
  *
  */
 
-package com.yujieliu.apimonitor.communication.standalone;
+package com.yujieliu.apimonitor.communication.o2r.standalone;
 
+import com.yujieliu.apimonitor.communication.o2r.ResultPublisher;
 import com.yujieliu.apimonitor.communication.domains.BaseResult;
 
-public interface ResultPublisher<T extends BaseResult> {
+public interface StandAloneResultPublisher<T extends BaseResult> extends ResultPublisher<T> {
 
-    void notifyResultSubscribers(T result);
-
-    void addSubscriber(ResultSubscriber<T> subscriber);
 }

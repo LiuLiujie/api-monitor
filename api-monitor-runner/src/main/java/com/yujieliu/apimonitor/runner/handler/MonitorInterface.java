@@ -16,18 +16,14 @@
  *
  */
 
-package com.yujieliu.apimonitor.communication.domains;
+package com.yujieliu.apimonitor.runner.handler;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.yujieliu.apimonitor.communication.domains.BaseAPI;
+import com.yujieliu.apimonitor.communication.domains.BaseResult;
 
-import java.util.Date;
+public interface MonitorInterface<API extends BaseAPI, Result extends BaseResult> {
 
-@Setter
-@Getter
-public class SimpleHTTPResult extends BaseResult{
+    void setNext(MonitorInterface<API, Result> handler);
 
-    public SimpleHTTPResult(BaseAPI api, boolean connection, Date time) {
-        super(api, connection, time);
-    }
+    Result monitorAPI(API api);
 }

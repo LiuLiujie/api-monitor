@@ -16,14 +16,14 @@
  *
  */
 
-package com.yujieliu.apimonitor.communication.standalone;
+package com.yujieliu.apimonitor.runner.controller;
 
 
 import com.yujieliu.apimonitor.communication.domains.BaseAPI;
+import com.yujieliu.apimonitor.communication.domains.BaseResult;
+import com.yujieliu.apimonitor.runner.handler.BaseHandler;
+import com.yujieliu.apimonitor.runner.handler.MonitorInterface;
 
-public interface APIPublisher<T extends BaseAPI> {
-
-    void notifyAPISubscribers(T api);
-
-    void addSubscriber(APISubscriber<T> subscriber);
+public abstract class RunnerController<API extends BaseAPI, Result extends BaseResult> {
+    public MonitorInterface<API, Result> handler = new BaseHandler<>();
 }

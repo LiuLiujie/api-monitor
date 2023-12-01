@@ -19,6 +19,20 @@
 package com.yujieliu.apimonitor.runner.handler;
 
 
-public abstract class BaseHandler {
+import com.yujieliu.apimonitor.communication.domains.BaseAPI;
+import com.yujieliu.apimonitor.communication.domains.BaseResult;
 
+public class BaseHandler<API extends BaseAPI, Result extends BaseResult> implements MonitorInterface<API, Result> {
+
+    private MonitorInterface<API, Result> next;
+
+    @Override
+    public void setNext(MonitorInterface<API, Result> handler) {
+        this.next = handler;
+    }
+
+    @Override
+    public Result monitorAPI(API api) {
+        return next.monitorAPI(api);
+    }
 }

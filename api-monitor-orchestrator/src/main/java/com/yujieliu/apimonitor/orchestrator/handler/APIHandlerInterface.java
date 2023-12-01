@@ -16,11 +16,14 @@
  *
  */
 
-package com.yujieliu.apimonitor.communication.standalone;
+package com.yujieliu.apimonitor.orchestrator.handler;
 
+import com.yujieliu.apimonitor.communication.domains.BaseAPI;
 import com.yujieliu.apimonitor.communication.domains.BaseResult;
 
-public interface ResultSubscriber<T extends BaseResult> {
+public interface APIHandlerInterface<API extends BaseAPI, Result extends BaseResult> {
 
-     void sendResultToOrchestrator(T result);
+    API constrcutAPI(String jsonStr);
+
+    Result constructResult(String jsonStr);
 }

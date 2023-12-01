@@ -16,18 +16,12 @@
  *
  */
 
-package com.yujieliu.apimonitor.communication.domains;
+package com.yujieliu.apimonitor.communication.o2r;
 
-import lombok.Getter;
-import lombok.Setter;
 
-import java.util.Date;
+import com.yujieliu.apimonitor.communication.domains.BaseAPI;
 
-@Setter
-@Getter
-public class SimpleHTTPResult extends BaseResult{
+public interface APIPublisher<T extends BaseAPI> {
 
-    public SimpleHTTPResult(BaseAPI api, boolean connection, Date time) {
-        super(api, connection, time);
-    }
+    void sendAPIToRunner(T api);
 }

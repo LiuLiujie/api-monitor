@@ -17,6 +17,12 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+        <!--Kafka MQ-->
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>com.yujieliu</groupId>
             <artifactId>api-monitor-communication</artifactId>

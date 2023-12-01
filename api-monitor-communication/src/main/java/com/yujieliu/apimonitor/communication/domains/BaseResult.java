@@ -27,11 +27,14 @@ import java.util.Date;
 @Getter
 public abstract class BaseResult {
 
+    BaseAPI api;
+
     boolean connection;
 
     Date time;
 
-    BaseResult(boolean connection, Date time){
+    BaseResult(BaseAPI api, boolean connection, Date time){
+        this.api = api;
         this.connection = connection;
         this.time = time;
     }

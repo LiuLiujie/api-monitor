@@ -16,11 +16,11 @@
  *
  */
 
-package com.yujieliu.apimonitor.communication.standalone;
+package com.yujieliu.apimonitor.communication.o2r.standalone;
 
-
+import com.yujieliu.apimonitor.communication.o2r.APIPublisher;
 import com.yujieliu.apimonitor.communication.domains.BaseAPI;
 
-public interface APISubscriber<T extends BaseAPI>{
-    void sendAPIToSubscriber(T api);
+public interface StandaloneAPIPublisher<T extends BaseAPI> extends APIPublisher<T> {
+
 }

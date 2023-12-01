@@ -18,54 +18,51 @@
 
 package com.yujieliu.apimonitor.orchestrator.controller;
 
+import com.yujieliu.apimonitor.communication.constant.C2OConstant;
+import com.yujieliu.apimonitor.communication.domains.BaseAPI;
+import com.yujieliu.apimonitor.communication.domains.BaseResult;
 import com.yujieliu.apimonitor.communication.domains.SimpleHTTPAPI;
-import com.yujieliu.apimonitor.orchestrator.handler.MonitoringHandler;
+import com.yujieliu.apimonitor.communication.domains.SimpleHTTPResult;
+import com.yujieliu.apimonitor.orchestrator.handler.APIHandlerInterface;
 import com.yujieliu.apimonitor.communication.response.RestResponseEntity;
-import jakarta.annotation.PostConstruct;
+import com.yujieliu.apimonitor.orchestrator.service.BaseService;
 import jakarta.annotation.Resource;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Log4j2
 @RestController
 public class MonitorController {
 
-   @Value("${api-monitor.role}")
-   private String mode = "standalone";
+   @Resource(type = BaseService.class)
+   private BaseService<BaseAPI, BaseResult> monitoringService;
 
    @Resource
-   List<MonitoringHandler> monitoringHandlers;
+   List<APIHandlerInterface<SimpleHTTPAPI, SimpleHTTPResult>> httpHandlers;
 
    @PostMapping("/monitor/http")
-   public RestResponseEntity<Object> monitorApi(@RequestBody SimpleHTTPAPI api){
-      boolean success = false;
-      for (MonitoringHandler handler : monitoringHandlers){
-         success = success || handler.addAPI(api);
+   public RestResponseEntity<Object> monitorApi(@RequestBody String jsonStr){
+      log.info(jsonStr);
+      SimpleHTTPAPI api = null;
+      for (var handler: httpHandlers){
+         api = handler.constrcutAPI(jsonStr);
       }
+      if (api == null){
+         return RestResponseEntity.sendBadOperation(C2OConstant.INVALID_HTTP_API);
+      }
+
+      boolean success = monitoringService.addAPI(api);
       if (!success){
-         return RestResponseEntity.sendBadOperation("");
+         return RestResponseEntity.sendBadOperation(C2OConstant.ADDING_API_ERROR);
       }
-      return RestResponseEntity.sendOK(null);
-   }
-
-   @PostConstruct
-   private void initLocalRunner(){
-      switch (mode) {
-         case "standalone":
-            for (MonitoringHandler handler : monitoringHandlers){
-               handler.initLocalRunner();
-            }
-      }
-      mockData();
-   }
-
-   private void mockData() {
-      this.monitorApi(new SimpleHTTPAPI("GitHub API", "Simple-1.0",
-              "https://api.github.com", "GET", 200));
+      Map<String, String> data = new HashMap<>(1);
+      data.put("id", api.getId());
+      return RestResponseEntity.sendOK(data);
    }
 }

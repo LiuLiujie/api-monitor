@@ -16,13 +16,11 @@
  *
  */
 
-package com.yujieliu.apimonitor.orchestrator.handler;
+package com.yujieliu.apimonitor.communication.o2r;
 
-import com.yujieliu.apimonitor.communication.domains.BaseAPI;
+import com.yujieliu.apimonitor.communication.domains.BaseResult;
 
-public interface MonitoringHandler {
+public interface ResultSubscriber<T extends BaseResult> {
 
-    boolean addAPI(BaseAPI api);
-
-    void initLocalRunner();
+     void receiveResultFromRunner(T result);
 }

@@ -1,6 +1,7 @@
 {
   "name": "GitHub API",
-  "schema": "simple-1.0",
+  "schema": "SimpleHTTP",
+  "version": "1.0",
   "request": {
     "server": "https://api.github.com",
     "method": "GET"
