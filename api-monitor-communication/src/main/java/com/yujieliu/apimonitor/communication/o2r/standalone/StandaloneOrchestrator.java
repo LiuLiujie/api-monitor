@@ -18,8 +18,12 @@
 
 package com.yujieliu.apimonitor.communication.o2r.standalone;
 
-import com.yujieliu.apimonitor.communication.o2r.APISubscriber;
 import com.yujieliu.apimonitor.communication.domains.BaseAPI;
+import com.yujieliu.apimonitor.communication.domains.BaseResult;
+import com.yujieliu.apimonitor.communication.o2r.BaseOrchestrator;
 
-public interface StandaloneAPISubscriber<T extends BaseAPI> extends APISubscriber<T> {
+public interface StandaloneOrchestrator<API extends BaseAPI, Result extends BaseResult>
+        extends BaseOrchestrator<API, Result> {
+
+
 }

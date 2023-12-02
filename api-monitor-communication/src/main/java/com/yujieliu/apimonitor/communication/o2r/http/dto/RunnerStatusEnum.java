@@ -16,11 +16,18 @@
  *
  */
 
-package com.yujieliu.apimonitor.communication.o2r.standalone;
+package com.yujieliu.apimonitor.communication.o2r.http.dto;
 
-import com.yujieliu.apimonitor.communication.o2r.APIPublisher;
-import com.yujieliu.apimonitor.communication.domains.BaseAPI;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-public interface StandaloneAPIPublisher<T extends BaseAPI> extends APIPublisher<T> {
+@Getter
+@AllArgsConstructor
+public enum RunnerStatusEnum {
 
+    OK("Ok"),
+
+    BUSY("Busy");
+
+    private final String status;
 }

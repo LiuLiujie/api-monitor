@@ -16,10 +16,28 @@
  *
  */
 
-package com.yujieliu.apimonitor.communication.o2r.mq;
+package com.yujieliu.apimonitor.communication.o2r.http.dto;
 
-import com.yujieliu.apimonitor.communication.domains.BaseAPI;
-import com.yujieliu.apimonitor.communication.o2r.APISubscriber;
+import com.yujieliu.apimonitor.communication.domains.BaseResult;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.Setter;
 
-public interface KafkaAPISubscriber <T extends BaseAPI> extends APISubscriber<T> {
+import java.util.List;
+
+@Getter
+@Setter
+@NoArgsConstructor
+public class HeartbeatRequestBody<T extends BaseResult> {
+
+    @NonNull
+    String runnerId;
+
+    @NonNull
+    String token;
+
+    RunnerStatusEnum status;
+
+    List<T> results;
 }

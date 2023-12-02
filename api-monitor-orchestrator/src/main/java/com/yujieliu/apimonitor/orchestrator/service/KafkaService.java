@@ -25,8 +25,7 @@ import com.yujieliu.apimonitor.communication.domains.BaseAPI;
 import com.yujieliu.apimonitor.communication.domains.BaseResult;
 import com.yujieliu.apimonitor.communication.domains.SimpleHTTPAPI;
 import com.yujieliu.apimonitor.communication.domains.SimpleHTTPResult;
-import com.yujieliu.apimonitor.communication.o2r.mq.KafkaAPIPublisher;
-import com.yujieliu.apimonitor.communication.o2r.mq.KafkaResultSubscriber;
+import com.yujieliu.apimonitor.communication.o2r.mq.KafkaOrchestrator;
 import jakarta.annotation.Resource;
 import lombok.extern.log4j.Log4j2;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -46,7 +45,7 @@ import java.util.Map;
 @Service
 @ConditionalOnProperty(value = "api-monitor.kafka.enable-kafka", havingValue = "true")
 public class KafkaService<API extends BaseAPI, Result extends BaseResult> extends BaseService<API, Result>
-        implements KafkaAPIPublisher<API>, KafkaResultSubscriber<Result> {
+        implements KafkaOrchestrator<API, Result> {
 
     //TODO: Use Redis instead of map
     private final Map<String, API> sentAPI = new HashMap<>();
@@ -55,24 +54,7 @@ public class KafkaService<API extends BaseAPI, Result extends BaseResult> extend
     private KafkaTemplate<String, String> kafkaTemplate;
 
     @Override
-    public void sendAPIToRunner(API api) {
-       var mapper = new ObjectMapper();
-       try {
-           String json = mapper.writeValueAsString(api);
-           kafkaTemplate.send(api.getSchema(), json);
-       } catch (JsonProcessingException e){
-           log.error(e);
-            //ignore
-       }
-    }
-
-    @Override
-    public void receiveResultFromRunner(Result result) {
-        super.addResult(result.getApi().getId(), result);
-    }
-
-    @Override
-    public boolean addAPI(API api) {
+    public boolean sendAPIToRunner(API api) {
         try {
             String jsonStr = new ObjectMapper().writeValueAsString(api);
             if (api instanceof SimpleHTTPAPI){
@@ -83,6 +65,11 @@ public class KafkaService<API extends BaseAPI, Result extends BaseResult> extend
         } catch (JsonProcessingException e){
             return false;
         }
+    }
+
+    @Override
+    public void receiveResultFromRunner(Result result) {
+        super.addResult(result.getApi().getId(), result);
     }
 
     @Bean

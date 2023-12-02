@@ -1,0 +1,4 @@
+api-monitor:
+  role: orchestrator
+  http:
+    enable-rest-api: true

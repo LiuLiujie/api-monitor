@@ -16,11 +16,21 @@
  *
  */
 
-package com.yujieliu.apimonitor.communication.o2r;
+package com.yujieliu.apimonitor.communication.o2r.http.dto;
 
-import com.yujieliu.apimonitor.communication.domains.BaseResult;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.Setter;
 
-public interface ResultSubscriber<T extends BaseResult> {
+@Setter
+@Getter
+@NoArgsConstructor
+public class RegisterRequestBody {
 
-     void receiveResultFromRunner(T result);
+    @NonNull
+    String registerToken;
+
+    @NonNull
+    String runnerId;
 }

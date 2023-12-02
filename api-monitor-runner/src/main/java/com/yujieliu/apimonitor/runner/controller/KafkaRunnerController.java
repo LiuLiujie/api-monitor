@@ -24,8 +24,7 @@ import com.yujieliu.apimonitor.communication.constant.O2RConstant;
 import com.yujieliu.apimonitor.communication.domains.BaseAPI;
 import com.yujieliu.apimonitor.communication.domains.BaseResult;
 import com.yujieliu.apimonitor.communication.domains.SimpleHTTPAPI;
-import com.yujieliu.apimonitor.communication.o2r.mq.KafkaAPISubscriber;
-import com.yujieliu.apimonitor.communication.o2r.mq.KafkaResultPublisher;
+import com.yujieliu.apimonitor.communication.o2r.mq.KafkaRunner;
 import com.yujieliu.apimonitor.runner.handler.SimpleHTTPMonitor;
 import jakarta.annotation.Resource;
 import lombok.extern.log4j.Log4j2;
@@ -37,8 +36,7 @@ import org.springframework.stereotype.Controller;
 @Log4j2
 @Controller
 public class KafkaRunnerController<API extends BaseAPI, Result extends BaseResult>
-        extends RunnerController<API, Result>
-        implements KafkaAPISubscriber<API>, KafkaResultPublisher<Result> {
+        extends RunnerController<API, Result> implements KafkaRunner<API, Result> {
 
     @Resource
     private KafkaTemplate<String, String> kafkaTemplate;

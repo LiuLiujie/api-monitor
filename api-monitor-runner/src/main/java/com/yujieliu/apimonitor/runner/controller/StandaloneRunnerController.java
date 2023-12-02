@@ -21,18 +21,17 @@ package com.yujieliu.apimonitor.runner.controller;
 import com.yujieliu.apimonitor.communication.domains.BaseAPI;
 import com.yujieliu.apimonitor.communication.domains.BaseResult;
 import com.yujieliu.apimonitor.communication.domains.SimpleHTTPAPI;
-import com.yujieliu.apimonitor.communication.o2r.standalone.StandaloneResultSubscriber;
-import com.yujieliu.apimonitor.communication.o2r.standalone.StandAloneResultPublisher;
-import com.yujieliu.apimonitor.communication.o2r.standalone.StandaloneAPISubscriber;
+import com.yujieliu.apimonitor.communication.o2r.standalone.StandaloneOrchestrator;
+import com.yujieliu.apimonitor.communication.o2r.standalone.StandaloneRunner;
 import com.yujieliu.apimonitor.runner.handler.SimpleHTTPMonitor;
 
 public class StandaloneRunnerController<API extends BaseAPI, Result extends BaseResult>
         extends RunnerController<API, Result>
-        implements StandaloneAPISubscriber<API>, StandAloneResultPublisher<Result> {
+        implements StandaloneRunner<API, Result> {
 
-    private final StandaloneResultSubscriber<Result> orchestrator;
+    private final StandaloneOrchestrator<API, Result> orchestrator;
 
-    public StandaloneRunnerController(StandaloneResultSubscriber<Result> orchestrator){
+    public StandaloneRunnerController(StandaloneOrchestrator<API, Result> orchestrator){
         this.orchestrator = orchestrator;
     }
 

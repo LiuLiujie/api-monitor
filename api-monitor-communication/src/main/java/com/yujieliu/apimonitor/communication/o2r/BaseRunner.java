@@ -18,9 +18,13 @@
 
 package com.yujieliu.apimonitor.communication.o2r;
 
-
 import com.yujieliu.apimonitor.communication.domains.BaseAPI;
+import com.yujieliu.apimonitor.communication.domains.BaseResult;
 
-public interface APISubscriber<T extends BaseAPI>{
-    void receiveAPIFromOrchestrator(T api);
+public interface BaseRunner<API extends BaseAPI, Result extends BaseResult> {
+
+    void receiveAPIFromOrchestrator(API api);
+
+    void sendResultToOrchestrator(Result result);
+
 }

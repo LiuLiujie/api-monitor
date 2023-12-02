@@ -18,9 +18,12 @@
 
 package com.yujieliu.apimonitor.communication.o2r;
 
+import com.yujieliu.apimonitor.communication.domains.BaseAPI;
 import com.yujieliu.apimonitor.communication.domains.BaseResult;
 
-public interface ResultPublisher<T extends BaseResult> {
+public interface BaseOrchestrator<API extends BaseAPI, Result extends BaseResult> {
 
-    void sendResultToOrchestrator(T result);
+    boolean sendAPIToRunner(API api);
+
+    void receiveResultFromRunner(Result result);
 }

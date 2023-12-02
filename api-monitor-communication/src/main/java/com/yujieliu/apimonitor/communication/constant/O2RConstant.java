@@ -29,4 +29,10 @@ public class O2RConstant {
     public static final String API_ERROR = "Error when handling API";
 
     public static final String RESULT_ERROR = "Error when constructing result";
+
+    public static final String HTTP_REGISTER_ERROR = "Invalid Registration";
+
+    public static final String HTTP_HEARTBEAT_ERROR = "Invalid HeartBeat";
+
+    public static final String HTTP_AUTH_FAILURE = "Auth Failure";
 }

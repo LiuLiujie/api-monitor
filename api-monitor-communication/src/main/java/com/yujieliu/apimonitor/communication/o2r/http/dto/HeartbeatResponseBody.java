@@ -16,11 +16,21 @@
  *
  */
 
-package com.yujieliu.apimonitor.communication.o2r.standalone;
+package com.yujieliu.apimonitor.communication.o2r.http.dto;
 
-import com.yujieliu.apimonitor.communication.o2r.ResultPublisher;
-import com.yujieliu.apimonitor.communication.domains.BaseResult;
+import com.yujieliu.apimonitor.communication.domains.BaseAPI;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-public interface StandAloneResultPublisher<T extends BaseResult> extends ResultPublisher<T> {
+import java.util.List;
 
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+public class HeartbeatResponseBody<T extends BaseAPI> {
+
+    List<T> apis;
 }

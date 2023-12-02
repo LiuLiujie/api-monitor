@@ -16,11 +16,18 @@
  *
  */
 
-package com.yujieliu.apimonitor.communication.o2r.mq;
+package com.yujieliu.apimonitor.communication.o2r.http.dto;
 
-import com.yujieliu.apimonitor.communication.o2r.ResultSubscriber;
-import com.yujieliu.apimonitor.communication.domains.BaseResult;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-public interface KafkaResultSubscriber <T extends BaseResult> extends ResultSubscriber<T> {
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+public class RegisterResponseBody {
 
+    String token;
 }

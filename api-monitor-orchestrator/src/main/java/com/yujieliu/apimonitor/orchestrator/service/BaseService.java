@@ -20,6 +20,7 @@ package com.yujieliu.apimonitor.orchestrator.service;
 
 import com.yujieliu.apimonitor.communication.domains.BaseAPI;
 import com.yujieliu.apimonitor.communication.domains.BaseResult;
+import com.yujieliu.apimonitor.communication.o2r.BaseOrchestrator;
 import lombok.extern.log4j.Log4j2;
 
 import java.util.LinkedList;
@@ -28,12 +29,14 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Log4j2
-public abstract class BaseService<API extends BaseAPI, Result extends BaseResult> {
+public abstract class BaseService<API extends BaseAPI, Result extends BaseResult> implements BaseOrchestrator<API, Result> {
 
     //TODO: Use Redis to cache the result in the future
     private final Map<String, List<Result>> results = new ConcurrentHashMap<>();
 
-    abstract public boolean addAPI(API api);
+    public boolean addAPI(API api){
+        return sendAPIToRunner(api);
+    }
 
     public synchronized void addResult(String id, Result result){
         log.info("Receive Result id: {}, time: {}", result.getApi().getId(), result.getTime());

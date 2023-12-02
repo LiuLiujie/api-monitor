@@ -20,32 +20,26 @@ package com.yujieliu.apimonitor.orchestrator.service;
 
 import com.yujieliu.apimonitor.communication.domains.BaseAPI;
 import com.yujieliu.apimonitor.communication.domains.BaseResult;
-import com.yujieliu.apimonitor.communication.o2r.standalone.StandaloneAPIPublisher;
-import com.yujieliu.apimonitor.communication.o2r.standalone.StandaloneResultSubscriber;
+import com.yujieliu.apimonitor.communication.o2r.standalone.StandaloneOrchestrator;
 import com.yujieliu.apimonitor.runner.controller.StandaloneRunnerController;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
 @Service
 @ConditionalOnProperty(value = "api-monitor.role", havingValue = "standalone")
-public class StandaloneRunnerService<API extends BaseAPI, Result extends BaseResult> extends BaseService<API, Result>
-        implements StandaloneAPIPublisher<API>, StandaloneResultSubscriber<Result> {
+public class StandaloneService<API extends BaseAPI, Result extends BaseResult> extends BaseService<API, Result>
+        implements StandaloneOrchestrator<API, Result> {
 
     StandaloneRunnerController<API, Result> controller = new StandaloneRunnerController<>(this);
 
     @Override
-    public void sendAPIToRunner(API api) {
+    public boolean sendAPIToRunner(API api) {
         controller.receiveAPIFromOrchestrator(api);
+        return true;
     }
 
     @Override
     public void receiveResultFromRunner(Result result) {
         super.addResult(result.getApi().getId(), result);
-    }
-
-    @Override
-    public boolean addAPI(API api) {
-        this.sendAPIToRunner(api);
-        return true;
     }
 }

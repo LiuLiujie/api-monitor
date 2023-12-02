@@ -16,12 +16,14 @@
  *
  */
 
-package com.yujieliu.apimonitor.communication.o2r;
-
+package com.yujieliu.apimonitor.communication.o2r.mq;
 
 import com.yujieliu.apimonitor.communication.domains.BaseAPI;
+import com.yujieliu.apimonitor.communication.domains.BaseResult;
+import com.yujieliu.apimonitor.communication.o2r.BaseOrchestrator;
 
-public interface APIPublisher<T extends BaseAPI> {
+public interface KafkaOrchestrator<API extends BaseAPI, Result extends BaseResult>
+        extends BaseOrchestrator<API, Result> {
 
-    void sendAPIToRunner(T api);
+
 }
