@@ -1,8 +1,17 @@
 # API Monitor
-This project aims to develop an API monitor that can be used on GitHub Actions to monitor the connectivity of third-party APIs. 
+This project aims to develop an distributed API monitor to monitor the connectivity of third-party APIs.
+
+It enbales four deployment ways:
+- Standalone: Deployed on a single machine to monitor APIs from public or internal network
+- Orchestrator-Runner using Message Queue: Deployed on a multiple machine to monitor APIs, recommend for internal network (due to the safety concern of MQ).
+  - Support MQ: Kafka
+- Orchestrator-Runner using Rest API: Deployed on a multiple machine to monitor APIs for both public internal network.
+- CI/CD environment: Deployed on GitHub Actions and use cron trigger to regularly run it for occasional monitoring.
 
 ## Core functionality (To Be Developed)
-1. Execute on GitHub Actions to monitor third-party APIs.
-2. Return a result that can be visualized on a static website and in JSON or Markdown file.
-3. Support GET/POST/PUT/ methods
-4. Support the validation of the HTTP response
+- [x] Monitor the connectivity of HTTP GET APIs.
+- [ ] Support HTTP POST/PUT methods
+- [ ] Validate the response of APIs with predefined expected result (compatible with OpenAPI standard)
+- [ ] Visualise the result on a static website or in JSON/Markdown file.
+- [ ] Support for chain of requests (for authentication chain or business chain)
+- [ ] Support for RPC calls
