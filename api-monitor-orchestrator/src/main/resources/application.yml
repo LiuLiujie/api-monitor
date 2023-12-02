@@ -1,19 +1,3 @@
-api-monitor:
-  role: standalone
-  kafka:
-    enable-kafka: true
-    ip: localhost
-    port: 9092
-
 spring:
-  kafka:
-    bootstrap-servers: ${api-monitor.kafka.ip}:${api-monitor.kafka.port}
-    producer:
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
-    consumer:
-      auto-offset-reset: latest
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      enable-auto-commit: true
-      auto-commit-interval: 1000
+  profiles:
+    active: standalone

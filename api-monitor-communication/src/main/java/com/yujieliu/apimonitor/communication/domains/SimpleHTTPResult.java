@@ -27,7 +27,15 @@ import java.util.Date;
 @Getter
 public class SimpleHTTPResult extends BaseResult{
 
-    public SimpleHTTPResult(BaseAPI api, boolean connection, Date time) {
-        super(api, connection, time);
+    public SimpleHTTPResult(BaseAPI api, boolean success, boolean connection,  Date time) {
+        super(api, success, connection, time);
+    }
+
+    public static SimpleHTTPResult getSuccessResult(SimpleHTTPAPI api, boolean connection, Date time) {
+        return new SimpleHTTPResult(api, true, connection, time);
+    }
+
+    public static SimpleHTTPResult getFailureResult(SimpleHTTPAPI api, Date time) {
+        return new SimpleHTTPResult(api, false, false, time);
     }
 }

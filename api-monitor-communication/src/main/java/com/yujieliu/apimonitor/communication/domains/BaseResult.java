@@ -18,24 +18,24 @@
 
 package com.yujieliu.apimonitor.communication.domains;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
 
 @Setter
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public abstract class BaseResult {
 
     BaseAPI api;
 
+    boolean success;
+
     boolean connection;
 
     Date time;
-
-    BaseResult(BaseAPI api, boolean connection, Date time){
-        this.api = api;
-        this.connection = connection;
-        this.time = time;
-    }
 }

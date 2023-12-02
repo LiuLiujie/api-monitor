@@ -48,7 +48,6 @@ public class MonitorController {
 
    @PostMapping("/monitor/http")
    public RestResponseEntity<Object> monitorApi(@RequestBody String jsonStr){
-      log.info(jsonStr);
       SimpleHTTPAPI api = null;
       for (var handler: httpHandlers){
          api = handler.constrcutAPI(jsonStr);

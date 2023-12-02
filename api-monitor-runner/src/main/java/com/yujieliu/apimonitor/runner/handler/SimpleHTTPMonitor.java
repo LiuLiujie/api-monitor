@@ -37,11 +37,12 @@ public class SimpleHTTPMonitor
                 .build();
         try(Response response = client.newCall(request).execute()){
             if (response.code() == api.getResponse().getStatus()){
-                return new SimpleHTTPResult(api,true, new Date());
+                SimpleHTTPResult.getSuccessResult(api, true, new Date());
+                return SimpleHTTPResult.getSuccessResult(api, true, new Date());
             }
-            return new SimpleHTTPResult(api,false, new Date());
+            return SimpleHTTPResult.getSuccessResult(api, false, new Date());
         }catch (IOException e){
-            return new SimpleHTTPResult(api,false, new Date());
+            return SimpleHTTPResult.getSuccessResult(api, false, new Date());
         }
     }
 }
