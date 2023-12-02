@@ -13,6 +13,17 @@
     <dependencies>
 
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!--Kafka MQ-->
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.yujieliu</groupId>
             <artifactId>api-monitor-communication</artifactId>
             <version>0.0.1-SNAPSHOT</version>

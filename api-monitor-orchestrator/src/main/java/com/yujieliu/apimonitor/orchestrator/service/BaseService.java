@@ -36,7 +36,7 @@ public abstract class BaseService<API extends BaseAPI, Result extends BaseResult
     abstract public boolean addAPI(API api);
 
     public synchronized void addResult(String id, Result result){
-        log.debug("Result added, id: {}, conn: {}, time: {}", id, result.isConnection(), result.getTime());
+        log.info("Receive Result id: {}, time: {}", result.getApi().getId(), result.getTime());
         if (results.containsKey(id)){
             List<Result> resultList = results.get(id);
             resultList.add(result);

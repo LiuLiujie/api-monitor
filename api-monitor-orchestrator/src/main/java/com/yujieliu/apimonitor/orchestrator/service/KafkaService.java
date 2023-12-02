@@ -20,6 +20,7 @@ package com.yujieliu.apimonitor.orchestrator.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.yujieliu.apimonitor.communication.constant.O2RConstant;
 import com.yujieliu.apimonitor.communication.domains.BaseAPI;
 import com.yujieliu.apimonitor.communication.domains.BaseResult;
 import com.yujieliu.apimonitor.communication.domains.SimpleHTTPAPI;
@@ -46,10 +47,6 @@ import java.util.Map;
 @ConditionalOnProperty(value = "api-monitor.kafka.enable-kafka", havingValue = "true")
 public class KafkaService<API extends BaseAPI, Result extends BaseResult> extends BaseService<API, Result>
         implements KafkaAPIPublisher<API>, KafkaResultSubscriber<Result> {
-
-    private static final String HTTP_API_TOPIC = "HttpAPI";
-
-    private static final String HTTP_RESULT_TOPIC = "HttpResult";
 
     //TODO: Use Redis instead of map
     private final Map<String, API> sentAPI = new HashMap<>();
@@ -79,7 +76,7 @@ public class KafkaService<API extends BaseAPI, Result extends BaseResult> extend
         try {
             String jsonStr = new ObjectMapper().writeValueAsString(api);
             if (api instanceof SimpleHTTPAPI){
-                kafkaTemplate.send(HTTP_API_TOPIC, api.getId(), jsonStr);
+                kafkaTemplate.send(O2RConstant.HTTP_API_TOPIC, api.getId(), jsonStr);
                 sentAPI.put(api.getId(), api);
             }
             return true;
@@ -91,10 +88,13 @@ public class KafkaService<API extends BaseAPI, Result extends BaseResult> extend
     @Bean
     public KafkaAdmin.NewTopics createTopic() {
         return new KafkaAdmin.NewTopics(
-                TopicBuilder.name(HTTP_RESULT_TOPIC)
+                TopicBuilder.name(O2RConstant.HTTP_RESULT_TOPIC)
                         .build(),
-                TopicBuilder.name(HTTP_API_TOPIC)
-                        .build());
+                TopicBuilder.name(O2RConstant.HTTP_API_TOPIC)
+                        .build(),
+                TopicBuilder.name(O2RConstant.RUNNER_ERROR_TOPIC)
+                        .build()
+        );
     }
 
     /**
@@ -102,11 +102,13 @@ public class KafkaService<API extends BaseAPI, Result extends BaseResult> extend
      * //TODO: Update to consumer in batch using kafka batchFactory
      * @param consumerRecord Results from runners
      */
-    @KafkaListener(topics = HTTP_RESULT_TOPIC, groupId = "orchestrator")
+    @KafkaListener(topics = O2RConstant.HTTP_RESULT_TOPIC, groupId = "orchestrator")
     private void receiveHttpResultFromRunner(ConsumerRecord<String, String> consumerRecord){
+
         String id = consumerRecord.key();
         API api = this.sentAPI.get(id);
         String jsonStr = consumerRecord.value();
+        log.info("Kafka receive result, id: {}", id);
         try {
             Result result = (Result) new ObjectMapper().readValue(jsonStr, SimpleHTTPResult.class);
             receiveResultFromRunner(result);
