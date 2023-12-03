@@ -1,5 +1,5 @@
 # API Monitor
-This project aims to develop a distributed API monitor to monitor the connectivity of third-party APIs.
+This project aims to develop a distributed API monitoring to monitor the connectivity and correctness of HTTP/PRC APIs.
 
 It enables four deployment ways:
 - **Standalone**: Deployed on a single machine to monitor APIs from public or internal network
@@ -10,6 +10,7 @@ It enables four deployment ways:
 
 ## Core functionality (To Be Developed)
 - [x] Monitor the connectivity of HTTP GET APIs.
+- [ ] Support all Standalone, MQ, Rest API deployments.
 - [ ] Support HTTP POST/PUT methods
 - [ ] Validate the response of APIs with predefined expected result (compatible with OpenAPI standard)
 - [ ] Visualise the result on a static website or in JSON/Markdown file.
