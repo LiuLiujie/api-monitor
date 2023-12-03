@@ -16,17 +16,16 @@
  *
  */
 
-package com.yujieliu.apimonitor.runner.controller;
+package com.yujieliu.apimonitor.runner.standalone;
 
 import com.yujieliu.apimonitor.communication.domains.BaseAPI;
 import com.yujieliu.apimonitor.communication.domains.BaseResult;
 import com.yujieliu.apimonitor.communication.domains.SimpleHTTPAPI;
 import com.yujieliu.apimonitor.communication.o2r.standalone.StandaloneOrchestrator;
 import com.yujieliu.apimonitor.communication.o2r.standalone.StandaloneRunner;
-import com.yujieliu.apimonitor.runner.handler.SimpleHTTPMonitor;
+import com.yujieliu.apimonitor.runner.service.impl.SimpleHTTPMonitorService;
 
 public class StandaloneRunnerController<API extends BaseAPI, Result extends BaseResult>
-        extends RunnerController<API, Result>
         implements StandaloneRunner<API, Result> {
 
     private final StandaloneOrchestrator<API, Result> orchestrator;
@@ -38,7 +37,8 @@ public class StandaloneRunnerController<API extends BaseAPI, Result extends Base
     @Override
     public void receiveAPIFromOrchestrator(API api) {
         if (api instanceof SimpleHTTPAPI){
-            var result = new SimpleHTTPMonitor().monitorAPI((SimpleHTTPAPI) api);
+            var monitorService = new SimpleHTTPMonitorService();
+            var result = monitorService.monitorAPI((SimpleHTTPAPI) api);
             this.sendResultToOrchestrator((Result) result);
         }
     }

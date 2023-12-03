@@ -18,14 +18,12 @@
 
 package com.yujieliu.apimonitor.communication.o2r.http.dto;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.Setter;
+import lombok.*;
 
 @Setter
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 public class RegisterRequestBody {
 
     @NonNull

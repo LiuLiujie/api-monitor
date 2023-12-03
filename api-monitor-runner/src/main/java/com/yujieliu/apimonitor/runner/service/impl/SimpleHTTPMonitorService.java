@@ -16,17 +16,19 @@
  *
  */
 
-package com.yujieliu.apimonitor.runner.handler;
+package com.yujieliu.apimonitor.runner.service.impl;
 
 import com.yujieliu.apimonitor.communication.domains.SimpleHTTPAPI;
 import com.yujieliu.apimonitor.communication.domains.SimpleHTTPResult;
+import com.yujieliu.apimonitor.runner.service.MonitorService;
 import okhttp3.*;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.Date;
 
-public class SimpleHTTPMonitor
-        extends BaseHandler<SimpleHTTPAPI, SimpleHTTPResult>{
+@Service
+public class SimpleHTTPMonitorService implements MonitorService<SimpleHTTPAPI, SimpleHTTPResult> {
 
     @Override
     public SimpleHTTPResult monitorAPI(SimpleHTTPAPI api) {
@@ -37,12 +39,12 @@ public class SimpleHTTPMonitor
                 .build();
         try(Response response = client.newCall(request).execute()){
             if (response.code() == api.getResponse().getStatus()){
-                SimpleHTTPResult.getSuccessResult(api, true, new Date());
-                return SimpleHTTPResult.getSuccessResult(api, true, new Date());
+                SimpleHTTPResult.getSuccessResult(api.getId(), true, new Date());
+                return SimpleHTTPResult.getSuccessResult(api.getId(), true, new Date());
             }
-            return SimpleHTTPResult.getSuccessResult(api, false, new Date());
+            return SimpleHTTPResult.getSuccessResult(api.getId(), false, new Date());
         }catch (IOException e){
-            return SimpleHTTPResult.getSuccessResult(api, false, new Date());
+            return SimpleHTTPResult.getSuccessResult(api.getId(), false, new Date());
         }
     }
 }

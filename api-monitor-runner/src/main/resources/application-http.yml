@@ -1,0 +1,6 @@
+api-monitor:
+  role: runner
+  http:
+    orchestrator: "http://localhost:8080"
+    register-token: "252fbe30-c2d7-4221-8bad-5d349ab2322e"
+    enable-rest-api: true

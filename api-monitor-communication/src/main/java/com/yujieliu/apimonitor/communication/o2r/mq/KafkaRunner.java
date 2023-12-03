@@ -24,6 +24,5 @@ import com.yujieliu.apimonitor.communication.o2r.BaseRunner;
 
 public interface KafkaRunner<API extends BaseAPI, Result extends BaseResult>
         extends BaseRunner<API, Result> {
-
     
 }

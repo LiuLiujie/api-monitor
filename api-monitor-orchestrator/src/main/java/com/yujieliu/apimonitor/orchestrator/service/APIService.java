@@ -16,14 +16,16 @@
  *
  */
 
-package com.yujieliu.apimonitor.runner.controller;
-
+package com.yujieliu.apimonitor.orchestrator.service;
 
 import com.yujieliu.apimonitor.communication.domains.BaseAPI;
 import com.yujieliu.apimonitor.communication.domains.BaseResult;
-import com.yujieliu.apimonitor.runner.handler.BaseHandler;
-import com.yujieliu.apimonitor.runner.handler.MonitorInterface;
 
-public abstract class RunnerController<API extends BaseAPI, Result extends BaseResult> {
-    public MonitorInterface<API, Result> handler = new BaseHandler<>();
+import java.util.List;
+
+public interface APIService<API extends BaseAPI, Result extends BaseResult> {
+
+    String addAPI(API api);
+
+    List<Result> getAPIResults(String apiId);
 }

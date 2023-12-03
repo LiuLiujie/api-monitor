@@ -31,7 +31,7 @@ import java.util.Date;
 @AllArgsConstructor
 public abstract class BaseResult {
 
-    BaseAPI api;
+    String apiId;
 
     boolean success;
 

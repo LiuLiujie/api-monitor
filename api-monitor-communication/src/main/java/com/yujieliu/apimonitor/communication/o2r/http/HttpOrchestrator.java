@@ -21,7 +21,6 @@ package com.yujieliu.apimonitor.communication.o2r.http;
 import com.yujieliu.apimonitor.communication.domains.BaseAPI;
 import com.yujieliu.apimonitor.communication.domains.BaseResult;
 import com.yujieliu.apimonitor.communication.o2r.BaseOrchestrator;
-import com.yujieliu.apimonitor.communication.o2r.http.dto.HeartbeatRequestBody;
 import com.yujieliu.apimonitor.communication.o2r.http.dto.RegisterRequestBody;
 import com.yujieliu.apimonitor.communication.response.RestResponseEntity;
 
@@ -30,5 +29,5 @@ public interface HttpOrchestrator<API extends BaseAPI, Result extends BaseResult
 
     RestResponseEntity<Object> registerRunner(RegisterRequestBody body);
 
-    RestResponseEntity<Object> heartbeat(HeartbeatRequestBody<Result> body);
+    RestResponseEntity<Object> heartbeat(String bodyStr);
 }

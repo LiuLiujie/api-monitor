@@ -19,16 +19,14 @@
 package com.yujieliu.apimonitor.communication.o2r.http.dto;
 
 import com.yujieliu.apimonitor.communication.domains.BaseResult;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class HeartbeatRequestBody<T extends BaseResult> {
 
     @NonNull

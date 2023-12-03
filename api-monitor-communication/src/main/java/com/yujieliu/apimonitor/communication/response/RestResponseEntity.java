@@ -19,8 +19,12 @@
 package com.yujieliu.apimonitor.communication.response;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
+@Setter
+@NoArgsConstructor
 public class RestResponseEntity<T> {
     /**
      * Status Code

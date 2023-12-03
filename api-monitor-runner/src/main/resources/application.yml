@@ -4,6 +4,6 @@ api-monitor:
 
 spring:
   profiles:
-    active: kafka
+    active: http
 server:
   port: 8081

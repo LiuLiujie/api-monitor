@@ -16,18 +16,22 @@
  *
  */
 
-package com.yujieliu.apimonitor.orchestrator.service;
+package com.yujieliu.apimonitor.orchestrator.handler;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yujieliu.apimonitor.communication.constant.O2RConstant;
 import com.yujieliu.apimonitor.communication.domains.BaseAPI;
 import com.yujieliu.apimonitor.communication.domains.BaseResult;
+import com.yujieliu.apimonitor.communication.domains.SimpleHTTPResult;
 import com.yujieliu.apimonitor.communication.o2r.http.*;
 import com.yujieliu.apimonitor.communication.o2r.http.dto.*;
 import com.yujieliu.apimonitor.communication.response.RestResponseEntity;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -35,9 +39,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.*;
 
 @Log4j2
-@Service
+@Controller //Need this or the @Mapping won't work
 @ConditionalOnProperty(value = "api-monitor.http.enable-rest-api", havingValue = "true")
-public class HttpService<API extends BaseAPI, Result extends BaseResult> extends BaseService<API, Result>
+public class HttpHandler<API extends BaseAPI, Result extends BaseResult> extends BaseHandler<API, Result>
         implements HttpOrchestrator<API, Result> {
 
     //TODO: Use Redis instead of map for these
@@ -51,14 +55,14 @@ public class HttpService<API extends BaseAPI, Result extends BaseResult> extends
 
     @PostConstruct
     void printRegisterToken(){
-        log.info("The register token for runner is: {}", HttpService.registerToken);
+        log.info("The register token for runner is: {}", HttpHandler.registerToken);
     }
 
     @Override
-    @PostMapping("/runner/http/register")
+    @PostMapping(O2RConstant.HTTP_REGISTER_API)
     @ResponseBody
     public RestResponseEntity<Object> registerRunner(@RequestBody RegisterRequestBody body) {
-        if (!HttpService.registerToken.equals(body.getRegisterToken()) || body.getRunnerId().isBlank()){
+        if (!HttpHandler.registerToken.equals(body.getRegisterToken()) || body.getRunnerId().isBlank()){
             return RestResponseEntity.sendBadOperation(O2RConstant.HTTP_REGISTER_ERROR);
         }
         String runnerId = body.getRunnerId();
@@ -73,11 +77,22 @@ public class HttpService<API extends BaseAPI, Result extends BaseResult> extends
     }
 
     @Override
-    @PostMapping("/runner/http/heartbeat")
+    @PostMapping(O2RConstant.HTTP_HEARTBEAT_SIMPLE_HTTP_API)
     @ResponseBody
-    public RestResponseEntity<Object> heartbeat(HeartbeatRequestBody<Result> body) {
+    public RestResponseEntity<Object> heartbeat(@RequestBody String bodyStr) {
+
+        var mapper = new ObjectMapper();
+        HeartbeatRequestBody<SimpleHTTPResult> body;
+        try {
+            body = mapper.readValue(bodyStr, new TypeReference<>() {});
+        }catch (JsonProcessingException e){
+            log.error(e);
+            return RestResponseEntity.sendBadRequest(O2RConstant.HTTP_HEARTBEAT_ERROR);
+        }
+
         String runnerId= body.getRunnerId();
         String token = body.getToken();
+
         if (runnerId.isBlank() || token.isBlank()){
             return RestResponseEntity.sendBadRequest(O2RConstant.HTTP_HEARTBEAT_ERROR);
         }
@@ -86,17 +101,17 @@ public class HttpService<API extends BaseAPI, Result extends BaseResult> extends
             return RestResponseEntity.sendBadOperation(O2RConstant.HTTP_AUTH_FAILURE);
         }
 
-        //Handle the results, need to remove the api from the pending list
+        //Handle the results, need to remove the apiId from the pending list
         if (!body.getResults().isEmpty()){
             if (pendingAPIs.containsKey(runnerId)){
                 List<API> apis = pendingAPIs.get(runnerId);
-                for (Result result : body.getResults()){
-                    this.receiveResultFromRunner(result);
-                    apis.removeIf(api -> api.getId().equals(result.getApi().getId()));
+                for (SimpleHTTPResult result : body.getResults()){
+                    this.receiveResultFromRunner((Result) result);
+                    apis.removeIf(api -> api.getId().equals(result.getApiId()));
                 }
             } else {
-                for (Result result : body.getResults()){
-                    this.receiveResultFromRunner(result);
+                for (SimpleHTTPResult result : body.getResults()){
+                    this.receiveResultFromRunner((Result) result);
                 }
             }
         }
@@ -106,11 +121,13 @@ public class HttpService<API extends BaseAPI, Result extends BaseResult> extends
         }
 
         List<API> apis = new LinkedList<>(pendingAPIs.get(runnerId));
+        log.info("Http receive a heartbeat from runner, id: {}, results: {}, new APIs: {}",
+                runnerId, body.getResults().size(), apis.size());
         return RestResponseEntity.sendOK(new HeartbeatResponseBody<>(apis));
     }
 
     @Override
-    public boolean sendAPIToRunner(API api) {
+    public void sendAPIToRunner(API api) {
         for (String runnerId: registeredRunners.keySet()){
             if (pendingAPIs.containsKey(runnerId)){
                 pendingAPIs.get(runnerId).add(api);
@@ -120,11 +137,10 @@ public class HttpService<API extends BaseAPI, Result extends BaseResult> extends
                 pendingAPIs.put(runnerId, apis);
             }
         }
-       return true;
     }
 
     @Override
     public void receiveResultFromRunner(Result result) {
-        super.addResult(result.getApi().getId(), result);
+        super.addResult(result.getApiId(), result);
     }
 }

@@ -16,14 +16,12 @@
  *
  */
 
-package com.yujieliu.apimonitor.runner.handler;
+package com.yujieliu.apimonitor.runner.service;
 
 import com.yujieliu.apimonitor.communication.domains.BaseAPI;
 import com.yujieliu.apimonitor.communication.domains.BaseResult;
 
-public interface MonitorInterface<API extends BaseAPI, Result extends BaseResult> {
-
-    void setNext(MonitorInterface<API, Result> handler);
+public interface MonitorService<API extends BaseAPI, Result extends BaseResult> {
 
     Result monitorAPI(API api);
 }

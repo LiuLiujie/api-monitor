@@ -19,23 +19,25 @@
 package com.yujieliu.apimonitor.communication.domains;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
 
 @Setter
 @Getter
+@NoArgsConstructor
 public class SimpleHTTPResult extends BaseResult{
 
-    public SimpleHTTPResult(BaseAPI api, boolean success, boolean connection,  Date time) {
-        super(api, success, connection, time);
+    public SimpleHTTPResult(String apiId, boolean success, boolean connection,  Date time) {
+        super(apiId, success, connection, time);
     }
 
-    public static SimpleHTTPResult getSuccessResult(SimpleHTTPAPI api, boolean connection, Date time) {
-        return new SimpleHTTPResult(api, true, connection, time);
+    public static SimpleHTTPResult getSuccessResult(String apiId, boolean connection, Date time) {
+        return new SimpleHTTPResult(apiId, true, connection, time);
     }
 
-    public static SimpleHTTPResult getFailureResult(SimpleHTTPAPI api, Date time) {
-        return new SimpleHTTPResult(api, false, false, time);
+    public static SimpleHTTPResult getFailureResult(String apiId, Date time) {
+        return new SimpleHTTPResult(apiId, false, false, time);
     }
 }

@@ -20,15 +20,19 @@ package com.yujieliu.apimonitor.communication.constant;
 
 public class O2RConstant {
 
-    public static final String HTTP_API_TOPIC = "HttpAPI";
+    public static final String SIMPLE_HTTP_API_TOPIC = "SimpleHttpAPI";
 
-    public static final String HTTP_RESULT_TOPIC = "HttpResult";
+    public static final String SIMPLE_HTTP_RESULT_TOPIC = "SimpleHttpResult";
 
     public static final String RUNNER_ERROR_TOPIC = "RunnerError";
 
     public static final String API_ERROR = "Error when handling API";
 
     public static final String RESULT_ERROR = "Error when constructing result";
+
+    public static final String HTTP_REGISTER_API = "/runner/http/register";
+
+    public static final String HTTP_HEARTBEAT_SIMPLE_HTTP_API = "/runner/http/heartbeat/http/simple";
 
     public static final String HTTP_REGISTER_ERROR = "Invalid Registration";
 

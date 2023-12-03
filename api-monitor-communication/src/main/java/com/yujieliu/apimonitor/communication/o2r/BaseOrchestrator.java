@@ -23,7 +23,7 @@ import com.yujieliu.apimonitor.communication.domains.BaseResult;
 
 public interface BaseOrchestrator<API extends BaseAPI, Result extends BaseResult> {
 
-    boolean sendAPIToRunner(API api);
+    void sendAPIToRunner(API api);
 
     void receiveResultFromRunner(Result result);
 }

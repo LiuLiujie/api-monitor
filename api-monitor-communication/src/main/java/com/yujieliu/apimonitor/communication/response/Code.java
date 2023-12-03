@@ -18,9 +18,8 @@
 
 package com.yujieliu.apimonitor.communication.response;
 
-import lombok.Getter;
+import com.fasterxml.jackson.annotation.JsonValue;
 
-@Getter
 public enum Code {
 
     /**
@@ -45,4 +44,8 @@ public enum Code {
         this.code = code;
     }
 
+    @JsonValue
+    public int getCode() {
+        return this.code;
+    }
 }
