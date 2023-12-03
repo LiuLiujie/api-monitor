@@ -3,9 +3,9 @@ This project aims to develop a distributed API monitor to monitor the connectivi
 
 It enables four deployment ways:
 - **Standalone**: Deployed on a single machine to monitor APIs from public or internal network
-- **Orchestrator-Runner using Message Queue**: Deployed on a multiple machine to monitor APIs, recommend for internal network (due to the safety concern of MQ).
+- **Orchestrator-Runner Orchestration with Message Queue**: Deployed one orchestrator and multiple runners to monitor APIs, recommend for internal network (due to the safety concern of MQ).
   - Support MQ: Kafka
-- **Orchestrator-Runner using Rest API**: Deployed on a multiple machine to monitor APIs for both public internal network.
+- **Orchestrator-Runner Orchestration with Rest API**: Deployed one orchestrator and multiple runners to monitor APIs for public or internal network.
 - **CI/CD pipeline**: Deployed on GitHub Actions and use cron trigger to regularly run it for occasional monitoring.
 
 ## Core functionality (To Be Developed)
