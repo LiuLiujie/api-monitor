@@ -41,7 +41,7 @@ public class StandaloneHandler<API extends BaseAPI, Result extends BaseResult> e
 
     @Override
     public void receiveResultFromRunner(Result result) {
-        log.info("Standalone Handler Receive API result, id: {}", result.getApiId());
+        //log.info("Standalone Handler Receive API result, id: {}", result.getApiId());
         super.addResult(result.getApiId(), result);
     }
 }
