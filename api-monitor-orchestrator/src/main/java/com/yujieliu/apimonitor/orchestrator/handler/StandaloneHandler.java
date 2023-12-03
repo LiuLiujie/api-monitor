@@ -22,11 +22,13 @@ import com.yujieliu.apimonitor.communication.domains.BaseAPI;
 import com.yujieliu.apimonitor.communication.domains.BaseResult;
 import com.yujieliu.apimonitor.communication.o2r.standalone.StandaloneOrchestrator;
 import com.yujieliu.apimonitor.runner.standalone.StandaloneRunnerController;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
+@Log4j2
 @Component
-@ConditionalOnProperty(value = "apiId-monitor.role", havingValue = "standalone")
+@ConditionalOnProperty(value = "api-monitor.role", havingValue = "standalone")
 public class StandaloneHandler<API extends BaseAPI, Result extends BaseResult> extends BaseHandler<API, Result>
         implements StandaloneOrchestrator<API, Result> {
 
@@ -39,6 +41,7 @@ public class StandaloneHandler<API extends BaseAPI, Result extends BaseResult> e
 
     @Override
     public void receiveResultFromRunner(Result result) {
+        log.info("Standalone Handler Receive API result, id: {}", result.getApiId());
         super.addResult(result.getApiId(), result);
     }
 }
