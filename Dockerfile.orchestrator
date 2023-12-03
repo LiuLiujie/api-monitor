@@ -1,8 +1,6 @@
 FROM openjdk:17
 
-ENV PARAMS="--spring.profiles.active=standalone"
-
 ARG JAR_FILE=api-monitor-orchestrator/target/api-monitor-orchestrator-0.0.1-SNAPSHOT.jar
 COPY ${JAR_FILE} app.jar
 
-ENTRYPOINT ["java","-jar","/app.jar","$PARAMS"]
+ENTRYPOINT ["java","-jar","/app.jar"]
