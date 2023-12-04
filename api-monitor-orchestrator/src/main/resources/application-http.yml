@@ -1,4 +1,13 @@
 api-monitor:
   role: orchestrator
-  http:
-    enable-rest-api: true
+  cache:
+    redis:
+    expiration:
+  communication:
+    rest-api:
+      enable: true
+    kafka:
+      enable:
+      ip:
+      port:
+    redis:

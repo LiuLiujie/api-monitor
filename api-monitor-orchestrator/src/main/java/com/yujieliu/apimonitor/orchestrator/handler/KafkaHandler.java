@@ -43,7 +43,7 @@ import java.util.Map;
 
 @Log4j2
 @Service
-@ConditionalOnProperty(value = "api-monitor.kafka.enable-kafka", havingValue = "true")
+@ConditionalOnProperty(value = "api-monitor.communication.kafka.enable", havingValue = "true")
 public class KafkaHandler<API extends BaseAPI, Result extends BaseResult> extends BaseHandler<API, Result>
         implements KafkaOrchestrator<API, Result> {
 

@@ -1,13 +1,19 @@
 api-monitor:
   role: runner
-  kafka:
-    enable-kafka: true
-    ip: localhost
-    port: 9092
+  cache:
+    redis:
+  communication:
+    rest-api:
+      enable:
+    kafka:
+      enable: true
+      ip: localhost
+      port: 9092
+    redis:
 
 spring:
   kafka:
-    bootstrap-servers: ${api-monitor.kafka.ip}:${api-monitor.kafka.port}
+    bootstrap-servers: ${api-monitor.communication.kafka.ip}:${api-monitor.communication.kafka.port}
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer

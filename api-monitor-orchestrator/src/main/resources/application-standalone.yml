@@ -1,2 +1,13 @@
 api-monitor:
   role: standalone
+  cache:
+    redis:
+    expiration:
+  communication:
+    rest-api:
+      enable:
+    kafka:
+      enable:
+      ip:
+      port:
+    redis:

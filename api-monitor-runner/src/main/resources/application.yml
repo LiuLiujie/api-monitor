@@ -1,4 +1,17 @@
 api-monitor:
+  role: runner
+  cache:
+    redis:
+  communication:
+    rest-api:
+      enable:
+      orchestrator:
+      register-token:
+    kafka:
+      enable:
+      ip:
+      port:
+    redis:
   runner:
     id: f8d16042-897f-4126-9ee3-3f4b24c2857e
 

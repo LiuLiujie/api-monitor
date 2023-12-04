@@ -40,7 +40,7 @@ import java.util.*;
 
 @Log4j2
 @Controller //Need this or the @Mapping won't work
-@ConditionalOnProperty(value = "api-monitor.http.enable-rest-api", havingValue = "true")
+@ConditionalOnProperty(value = "api-monitor.communication.http.enable", havingValue = "true")
 public class HttpHandler<API extends BaseAPI, Result extends BaseResult> extends BaseHandler<API, Result>
         implements HttpOrchestrator<API, Result> {
 

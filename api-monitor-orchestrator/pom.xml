@@ -23,6 +23,12 @@
             <artifactId>spring-kafka</artifactId>
         </dependency>
 
+        <!--Redis for MQ or Cache-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>com.yujieliu</groupId>
             <artifactId>api-monitor-communication</artifactId>

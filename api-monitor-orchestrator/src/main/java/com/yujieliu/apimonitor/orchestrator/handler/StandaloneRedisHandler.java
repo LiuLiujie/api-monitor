@@ -28,8 +28,8 @@ import org.springframework.stereotype.Component;
 
 @Log4j2
 @Component
-@ConditionalOnExpression("'${api-monitor.role}' == 'standalone' && !${api-monitor.cache.redis}")
-public class StandaloneHandler<API extends BaseAPI, Result extends BaseResult> extends BaseHandler<API, Result>
+@ConditionalOnExpression("'${api-monitor.role}' == 'standalone' && ${api-monitor.cache.redis}")
+public class StandaloneRedisHandler<API extends BaseAPI, Result extends BaseResult> extends BaseRedisCacheHandler<API, Result>
         implements StandaloneOrchestrator<API, Result> {
 
     StandaloneRunnerController<API, Result> controller = new StandaloneRunnerController<>(this);
@@ -41,7 +41,7 @@ public class StandaloneHandler<API extends BaseAPI, Result extends BaseResult> e
 
     @Override
     public void receiveResultFromRunner(Result result) {
-        log.info("Standalone Handler Receive API result, id: {}", result.getApiId());
+        log.info("Standalone Redis Handler Receive API result, id: {}", result.getApiId());
         super.addResult(result.getApiId(), result);
     }
 }

@@ -35,7 +35,7 @@ public abstract class BaseHandler<API extends BaseAPI, Result extends BaseResult
     private final Map<String, List<Result>> results = new ConcurrentHashMap<>();
 
     public synchronized void addResult(String apiId, Result result){
-        log.info("Receive Result id: {}, time: {}", result.getApiId(), result.getTime());
+        log.info("Handler tries to save result id: {}, time: {}", result.getApiId(), result.getTime());
         if (results.containsKey(apiId)){
             List<Result> resultList = results.get(apiId);
             resultList.add(result);

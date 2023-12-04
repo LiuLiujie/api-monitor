@@ -1,8 +1,8 @@
 api-monitor:
-  role: orchestrator
+  role: standalone
   cache:
-    redis:
-    expiration:
+    redis: true
+    expiration: 1800
   communication:
     rest-api:
       enable:
@@ -13,5 +13,7 @@ api-monitor:
     redis:
 
 spring:
-  profiles:
-    active: standalone
+  data:
+    redis:
+      host: localhost
+

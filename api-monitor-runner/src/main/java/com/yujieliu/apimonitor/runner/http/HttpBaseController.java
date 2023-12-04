@@ -44,10 +44,10 @@ import java.util.LinkedList;
 public abstract class HttpBaseController<API extends BaseAPI, Result extends BaseResult>
         implements HttpRunner<API, Result> {
 
-    @Value("${api-monitor.http.register-token}")
+    @Value("${api-monitor.communication.rest-api.register-token}")
     protected String registerToken;
 
-    @Value("${api-monitor.http.orchestrator}")
+    @Value("${api-monitor.communication.rest-api.orchestrator}")
     protected String orchestrator;
 
     @Value("${api-monitor.runner.id}")

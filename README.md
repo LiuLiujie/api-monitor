@@ -52,6 +52,6 @@ docker logs api-monitor-orchestrator
 Finally, use the token and the address of your orchestrator to start the runner
 
 ```bash
-docker run -d --name api-monitor-runner -p 8081:8081 -e "SPRING_PROFILES_ACTIVE=http" -e "api-monitor_http_register-token=<YOUR-REGISTRATION-TOKEN>" -e "api-monitor_http_orchestrator=http://<YOUR-ORCHESTRATOR-DOMAIN>:8080" api-monitor/api-monitor-runner
+docker run -d --name api-monitor-runner -p 8081:8081 -e "SPRING_PROFILES_ACTIVE=http" -e "api-monitor_communication_rest-api_register-token=<YOUR-REGISTRATION-TOKEN>" -e "api-monitor_communication_rest-api_orchestrator=http://<YOUR-ORCHESTRATOR-DOMAIN>:8080" api-monitor/api-monitor-runner
 ```
 
