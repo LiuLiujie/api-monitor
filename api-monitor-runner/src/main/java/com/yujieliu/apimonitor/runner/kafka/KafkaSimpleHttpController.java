@@ -31,7 +31,7 @@ import org.springframework.stereotype.Controller;
 
 @Log4j2
 @Controller
-@ConditionalOnProperty(value = "apiId-monitor.kafka.enable-kafka", havingValue = "true")
+@ConditionalOnProperty(value = "apiId-monitor.communication.kafka.enable", havingValue = "true")
 public class KafkaSimpleHttpController extends KafkaBaseController<SimpleHTTPAPI, SimpleHTTPResult> {
 
     @Override

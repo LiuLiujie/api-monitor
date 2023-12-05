@@ -38,7 +38,7 @@ import java.util.concurrent.TimeUnit;
 
 @Log4j2
 @Controller
-@ConditionalOnProperty(value = "api-monitor.http.enable-rest-api", havingValue = "true")
+@ConditionalOnProperty(value = "api-monitor.communication.rest-api.enable", havingValue = "true")
 public class HttpSimpleHttpController extends HttpBaseController<SimpleHTTPAPI, SimpleHTTPResult> {
 
     @Scheduled(fixedRate = 5, timeUnit = TimeUnit.SECONDS)
