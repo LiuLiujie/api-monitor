@@ -16,7 +16,7 @@
  *
  */
 
-package com.yujieliu.apimonitor.runner.kafka;
+package com.yujieliu.apimonitor.runner.controller.kafka;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

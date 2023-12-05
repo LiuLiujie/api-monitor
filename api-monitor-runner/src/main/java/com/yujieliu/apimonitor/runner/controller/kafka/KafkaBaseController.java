@@ -16,7 +16,7 @@
  *
  */
 
-package com.yujieliu.apimonitor.runner.kafka;
+package com.yujieliu.apimonitor.runner.controller.kafka;
 
 import com.yujieliu.apimonitor.communication.constant.O2RConstant;
 import com.yujieliu.apimonitor.communication.domains.BaseAPI;

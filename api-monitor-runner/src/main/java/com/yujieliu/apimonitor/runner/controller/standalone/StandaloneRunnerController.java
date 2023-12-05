@@ -16,7 +16,7 @@
  *
  */
 
-package com.yujieliu.apimonitor.runner.standalone;
+package com.yujieliu.apimonitor.runner.controller.standalone;
 
 import com.yujieliu.apimonitor.communication.domains.BaseAPI;
 import com.yujieliu.apimonitor.communication.domains.BaseResult;

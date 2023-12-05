@@ -14,6 +14,14 @@ api-monitor:
     redis:
   runner:
     id: f8d16042-897f-4126-9ee3-3f4b24c2857e
+  config:
+    nacos:
+      enable: true
+      server: localhost:8848
+      username:
+      password:
+      data-id: api-monitor-runner
+      group: DEFAULT_GROUP
 
 spring:
   profiles:

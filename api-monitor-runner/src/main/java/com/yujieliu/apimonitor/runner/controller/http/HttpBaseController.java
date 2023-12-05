@@ -16,7 +16,7 @@
  *
  */
 
-package com.yujieliu.apimonitor.runner.http;
+package com.yujieliu.apimonitor.runner.controller.http;
 
 import com.yujieliu.apimonitor.communication.constant.O2RConstant;
 import com.yujieliu.apimonitor.communication.domains.BaseAPI;
@@ -26,6 +26,8 @@ import com.yujieliu.apimonitor.communication.orchestration.http.dto.RegisterRequ
 import com.yujieliu.apimonitor.communication.orchestration.http.dto.RegisterResponseBody;
 import com.yujieliu.apimonitor.communication.response.Code;
 import com.yujieliu.apimonitor.communication.response.RestResponseEntity;
+import com.yujieliu.apimonitor.runner.controller.ConfigurableController;
+import com.yujieliu.apimonitor.runner.service.ConfigService;
 import com.yujieliu.apimonitor.runner.service.MonitorService;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
@@ -42,7 +44,7 @@ import java.util.LinkedList;
 
 @Log4j2
 public abstract class HttpBaseController<API extends BaseAPI, Result extends BaseResult>
-        implements HttpRunner<API, Result> {
+        implements HttpRunner<API, Result>, ConfigurableController {
 
     @Value("${api-monitor.communication.rest-api.register-token}")
     protected String registerToken;
@@ -58,6 +60,9 @@ public abstract class HttpBaseController<API extends BaseAPI, Result extends Bas
 
     @Resource
     MonitorService<API, Result> monitorService;
+
+    @Resource
+    ConfigService configService = null;
 
     protected String token;
 
@@ -75,8 +80,24 @@ public abstract class HttpBaseController<API extends BaseAPI, Result extends Bas
         this.results.add(result);
     }
 
+    @Override
+    public void loadConfig() {
+        if (configService != null){
+            String orchestrator = this.configService.getProperty("api-monitor.communication.rest-api.orchestrator");
+            String registerToken = this.configService.getProperty("api-monitor.communication.rest-api.register-token");
+            if (!orchestrator.isBlank() && !registerToken.isBlank()){
+                this.orchestrator = orchestrator;
+                this.registerToken = registerToken;
+                log.info("Receive orchestrator info from configuration service, override the local ones");
+            }
+        }
+    }
+
     @PostConstruct
     public void register() {
+        //Try to load config from configuration service
+        this.loadConfig();
+
         String url = this.orchestrator+ O2RConstant.HTTP_REGISTER_API;
         var request = new RegisterRequestBody(this.registerToken, this.runnerId);
         ParameterizedTypeReference<RestResponseEntity<RegisterResponseBody>> typeRef = new ParameterizedTypeReference<>() {};
@@ -98,7 +119,7 @@ public abstract class HttpBaseController<API extends BaseAPI, Result extends Bas
         this.heartbeat();//Start the first heartbeat
     }
 
-    public RestTemplate getTemplate(){
+    protected RestTemplate getTemplate(){
         return this.restTemplateBuilder
                 .build();
     }

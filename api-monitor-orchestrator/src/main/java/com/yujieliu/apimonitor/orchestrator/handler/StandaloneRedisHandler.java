@@ -21,14 +21,14 @@ package com.yujieliu.apimonitor.orchestrator.handler;
 import com.yujieliu.apimonitor.communication.domains.BaseAPI;
 import com.yujieliu.apimonitor.communication.domains.BaseResult;
 import com.yujieliu.apimonitor.communication.orchestration.standalone.StandaloneOrchestrator;
-import com.yujieliu.apimonitor.runner.standalone.StandaloneRunnerController;
+import com.yujieliu.apimonitor.runner.controller.standalone.StandaloneRunnerController;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.stereotype.Component;
 
 @Log4j2
 @Component
-@ConditionalOnExpression("'${api-monitor.role}' == 'standalone' && ${api-monitor.cache.redis}")
+@ConditionalOnExpression("'standalone'.equals('${api-monitor.role}') && '${api-monitor.cache.redis}' == 'true'")
 public class StandaloneRedisHandler<API extends BaseAPI, Result extends BaseResult> extends BaseRedisCacheHandler<API, Result>
         implements StandaloneOrchestrator<API, Result> {
 

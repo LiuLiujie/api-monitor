@@ -16,7 +16,7 @@
  *
  */
 
-package com.yujieliu.apimonitor.runner.http;
+package com.yujieliu.apimonitor.runner.controller.http;
 
 import com.yujieliu.apimonitor.communication.constant.O2RConstant;
 import com.yujieliu.apimonitor.communication.domains.SimpleHTTPAPI;
