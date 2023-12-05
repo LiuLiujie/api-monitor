@@ -16,7 +16,7 @@
  *
  */
 
-package com.yujieliu.apimonitor.communication.o2r.http.dto;
+package com.yujieliu.apimonitor.communication.orchestration.http.dto;
 
 import com.yujieliu.apimonitor.communication.domains.BaseAPI;
 import lombok.AllArgsConstructor;

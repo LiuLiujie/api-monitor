@@ -16,18 +16,26 @@
  *
  */
 
-package com.yujieliu.apimonitor.communication.o2r.http;
+package com.yujieliu.apimonitor.communication.orchestration.http.dto;
 
-import com.yujieliu.apimonitor.communication.domains.BaseAPI;
 import com.yujieliu.apimonitor.communication.domains.BaseResult;
-import com.yujieliu.apimonitor.communication.o2r.BaseOrchestrator;
-import com.yujieliu.apimonitor.communication.o2r.http.dto.RegisterRequestBody;
-import com.yujieliu.apimonitor.communication.response.RestResponseEntity;
+import lombok.*;
 
-public interface HttpOrchestrator<API extends BaseAPI, Result extends BaseResult>
-        extends BaseOrchestrator<API, Result> {
+import java.util.List;
 
-    RestResponseEntity<Object> registerRunner(RegisterRequestBody body);
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class HeartbeatRequestBody<T extends BaseResult> {
 
-    RestResponseEntity<Object> heartbeat(String bodyStr);
+    @NonNull
+    String runnerId;
+
+    @NonNull
+    String token;
+
+    RunnerStatusEnum status;
+
+    List<T> results;
 }

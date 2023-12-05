@@ -25,7 +25,7 @@ import com.yujieliu.apimonitor.communication.domains.BaseAPI;
 import com.yujieliu.apimonitor.communication.domains.BaseResult;
 import com.yujieliu.apimonitor.communication.domains.SimpleHTTPAPI;
 import com.yujieliu.apimonitor.communication.domains.SimpleHTTPResult;
-import com.yujieliu.apimonitor.communication.o2r.mq.KafkaOrchestrator;
+import com.yujieliu.apimonitor.communication.orchestration.mq.KafkaOrchestrator;
 import jakarta.annotation.Resource;
 import lombok.extern.log4j.Log4j2;
 import org.apache.kafka.clients.consumer.ConsumerRecord;

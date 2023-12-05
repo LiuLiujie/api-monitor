@@ -16,15 +16,18 @@
  *
  */
 
-package com.yujieliu.apimonitor.communication.o2r;
+package com.yujieliu.apimonitor.communication.orchestration.http.dto;
 
-import com.yujieliu.apimonitor.communication.domains.BaseAPI;
-import com.yujieliu.apimonitor.communication.domains.BaseResult;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-public interface BaseRunner<API extends BaseAPI, Result extends BaseResult> {
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+public class RegisterResponseBody {
 
-    void receiveAPIFromOrchestrator(API api);
-
-    void sendResultToOrchestrator(Result result);
-
+    String token;
 }

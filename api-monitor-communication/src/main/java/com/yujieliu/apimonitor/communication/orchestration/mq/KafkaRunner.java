@@ -16,18 +16,13 @@
  *
  */
 
-package com.yujieliu.apimonitor.communication.o2r.http.dto;
+package com.yujieliu.apimonitor.communication.orchestration.mq;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.yujieliu.apimonitor.communication.domains.BaseAPI;
+import com.yujieliu.apimonitor.communication.domains.BaseResult;
+import com.yujieliu.apimonitor.communication.orchestration.BaseRunner;
 
-@Setter
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
-public class RegisterResponseBody {
-
-    String token;
+public interface KafkaRunner<API extends BaseAPI, Result extends BaseResult>
+        extends BaseRunner<API, Result> {
+    
 }

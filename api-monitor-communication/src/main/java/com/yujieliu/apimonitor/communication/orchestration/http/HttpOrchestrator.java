@@ -16,16 +16,18 @@
  *
  */
 
-package com.yujieliu.apimonitor.communication.o2r.http;
+package com.yujieliu.apimonitor.communication.orchestration.http;
 
 import com.yujieliu.apimonitor.communication.domains.BaseAPI;
 import com.yujieliu.apimonitor.communication.domains.BaseResult;
-import com.yujieliu.apimonitor.communication.o2r.BaseRunner;
+import com.yujieliu.apimonitor.communication.orchestration.BaseOrchestrator;
+import com.yujieliu.apimonitor.communication.orchestration.http.dto.RegisterRequestBody;
+import com.yujieliu.apimonitor.communication.response.RestResponseEntity;
 
-public interface HttpRunner<API extends BaseAPI, Result extends BaseResult>
-        extends BaseRunner<API, Result> {
+public interface HttpOrchestrator<API extends BaseAPI, Result extends BaseResult>
+        extends BaseOrchestrator<API, Result> {
 
-    void register();
+    RestResponseEntity<Object> registerRunner(RegisterRequestBody body);
 
-    void heartbeat();
+    RestResponseEntity<Object> heartbeat(String bodyStr);
 }

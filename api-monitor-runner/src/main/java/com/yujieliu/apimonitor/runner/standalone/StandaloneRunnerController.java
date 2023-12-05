@@ -21,8 +21,8 @@ package com.yujieliu.apimonitor.runner.standalone;
 import com.yujieliu.apimonitor.communication.domains.BaseAPI;
 import com.yujieliu.apimonitor.communication.domains.BaseResult;
 import com.yujieliu.apimonitor.communication.domains.SimpleHTTPAPI;
-import com.yujieliu.apimonitor.communication.o2r.standalone.StandaloneOrchestrator;
-import com.yujieliu.apimonitor.communication.o2r.standalone.StandaloneRunner;
+import com.yujieliu.apimonitor.communication.orchestration.standalone.StandaloneOrchestrator;
+import com.yujieliu.apimonitor.communication.orchestration.standalone.StandaloneRunner;
 import com.yujieliu.apimonitor.runner.service.impl.SimpleHTTPMonitorService;
 
 public class StandaloneRunnerController<API extends BaseAPI, Result extends BaseResult>

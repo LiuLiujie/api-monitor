@@ -16,14 +16,18 @@
  *
  */
 
-package com.yujieliu.apimonitor.communication.o2r.standalone;
+package com.yujieliu.apimonitor.communication.orchestration.http.dto;
 
-import com.yujieliu.apimonitor.communication.domains.BaseAPI;
-import com.yujieliu.apimonitor.communication.domains.BaseResult;
-import com.yujieliu.apimonitor.communication.o2r.BaseOrchestrator;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-public interface StandaloneOrchestrator<API extends BaseAPI, Result extends BaseResult>
-        extends BaseOrchestrator<API, Result> {
+@Getter
+@AllArgsConstructor
+public enum RunnerStatusEnum {
 
+    OK("Ok"),
 
+    BUSY("Busy");
+
+    private final String status;
 }

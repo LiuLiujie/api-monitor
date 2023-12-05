@@ -16,19 +16,14 @@
  *
  */
 
-package com.yujieliu.apimonitor.communication.o2r.http.dto;
+package com.yujieliu.apimonitor.communication.orchestration.mq;
 
-import lombok.*;
+import com.yujieliu.apimonitor.communication.domains.BaseAPI;
+import com.yujieliu.apimonitor.communication.domains.BaseResult;
+import com.yujieliu.apimonitor.communication.orchestration.BaseOrchestrator;
 
-@Setter
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
-public class RegisterRequestBody {
+public interface KafkaOrchestrator<API extends BaseAPI, Result extends BaseResult>
+        extends BaseOrchestrator<API, Result> {
 
-    @NonNull
-    String registerToken;
 
-    @NonNull
-    String runnerId;
 }

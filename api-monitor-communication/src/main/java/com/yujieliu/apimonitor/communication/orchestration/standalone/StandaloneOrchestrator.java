@@ -16,14 +16,14 @@
  *
  */
 
-package com.yujieliu.apimonitor.communication.o2r.standalone;
+package com.yujieliu.apimonitor.communication.orchestration.standalone;
 
 import com.yujieliu.apimonitor.communication.domains.BaseAPI;
 import com.yujieliu.apimonitor.communication.domains.BaseResult;
-import com.yujieliu.apimonitor.communication.o2r.BaseRunner;
+import com.yujieliu.apimonitor.communication.orchestration.BaseOrchestrator;
 
-public interface StandaloneRunner<API extends BaseAPI, Result extends BaseResult>
-        extends BaseRunner<API, Result> {
+public interface StandaloneOrchestrator<API extends BaseAPI, Result extends BaseResult>
+        extends BaseOrchestrator<API, Result> {
 
-    
+
 }

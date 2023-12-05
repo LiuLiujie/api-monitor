@@ -16,14 +16,16 @@
  *
  */
 
-package com.yujieliu.apimonitor.communication.o2r;
+package com.yujieliu.apimonitor.communication.orchestration.http;
 
 import com.yujieliu.apimonitor.communication.domains.BaseAPI;
 import com.yujieliu.apimonitor.communication.domains.BaseResult;
+import com.yujieliu.apimonitor.communication.orchestration.BaseRunner;
 
-public interface BaseOrchestrator<API extends BaseAPI, Result extends BaseResult> {
+public interface HttpRunner<API extends BaseAPI, Result extends BaseResult>
+        extends BaseRunner<API, Result> {
 
-    void sendAPIToRunner(API api);
+    void register();
 
-    void receiveResultFromRunner(Result result);
+    void heartbeat();
 }

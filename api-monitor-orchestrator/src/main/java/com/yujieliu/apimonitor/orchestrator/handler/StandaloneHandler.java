@@ -20,7 +20,7 @@ package com.yujieliu.apimonitor.orchestrator.handler;
 
 import com.yujieliu.apimonitor.communication.domains.BaseAPI;
 import com.yujieliu.apimonitor.communication.domains.BaseResult;
-import com.yujieliu.apimonitor.communication.o2r.standalone.StandaloneOrchestrator;
+import com.yujieliu.apimonitor.communication.orchestration.standalone.StandaloneOrchestrator;
 import com.yujieliu.apimonitor.runner.standalone.StandaloneRunnerController;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;

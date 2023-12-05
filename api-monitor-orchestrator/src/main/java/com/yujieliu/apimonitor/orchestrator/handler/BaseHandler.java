@@ -20,7 +20,7 @@ package com.yujieliu.apimonitor.orchestrator.handler;
 
 import com.yujieliu.apimonitor.communication.domains.BaseAPI;
 import com.yujieliu.apimonitor.communication.domains.BaseResult;
-import com.yujieliu.apimonitor.communication.o2r.BaseOrchestrator;
+import com.yujieliu.apimonitor.communication.orchestration.BaseOrchestrator;
 import lombok.extern.log4j.Log4j2;
 
 import java.util.LinkedList;

@@ -16,26 +16,19 @@
  *
  */
 
-package com.yujieliu.apimonitor.communication.o2r.http.dto;
+package com.yujieliu.apimonitor.communication.orchestration.http.dto;
 
-import com.yujieliu.apimonitor.communication.domains.BaseResult;
 import lombok.*;
 
-import java.util.List;
-
-@Getter
 @Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class HeartbeatRequestBody<T extends BaseResult> {
+public class RegisterRequestBody {
+
+    @NonNull
+    String registerToken;
 
     @NonNull
     String runnerId;
-
-    @NonNull
-    String token;
-
-    RunnerStatusEnum status;
-
-    List<T> results;
 }

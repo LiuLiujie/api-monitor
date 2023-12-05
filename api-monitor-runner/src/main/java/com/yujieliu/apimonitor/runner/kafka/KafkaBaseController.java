@@ -21,7 +21,7 @@ package com.yujieliu.apimonitor.runner.kafka;
 import com.yujieliu.apimonitor.communication.constant.O2RConstant;
 import com.yujieliu.apimonitor.communication.domains.BaseAPI;
 import com.yujieliu.apimonitor.communication.domains.BaseResult;
-import com.yujieliu.apimonitor.communication.o2r.mq.KafkaRunner;
+import com.yujieliu.apimonitor.communication.orchestration.mq.KafkaRunner;
 import com.yujieliu.apimonitor.runner.service.MonitorService;
 import jakarta.annotation.Resource;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
