@@ -4,6 +4,7 @@ API Monitor is a distributed API monitoring to monitor the connectivity and corr
 ## Core functionality (To Be Developed)
 - [x] Monitor the connectivity of HTTP GET APIs.
 - [x] Support all Standalone, MQ, Rest API deployments.
+- [ ] Collect and analyze the latency and jitter of APIs
 - [ ] Support HTTP POST/PUT methods
 - [ ] Validate the response of APIs with predefined expected result (compatible with OpenAPI standard)
 - [ ] Visualise the result on a static website or in JSON/Markdown file.
